@@ -51,6 +51,7 @@ public class HobbyResource {
 
     private Response invokeServiceUnavailable(String type) {
         logger.debug(String.format("Type specified is not supported %s", type));
-        return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(BasicHobby.empty()).build();
+        return Response.status(Response.Status.SERVICE_UNAVAILABLE)
+                .entity(BasicHobby.empty()).build();
     }
 }

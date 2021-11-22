@@ -12,7 +12,7 @@ public class HobbyResourceTest {
     @Test
     void getRandomPricedHobby() {
         given()
-                .when().get("/action")
+                .when().get("/actions")
                 .then()
                 .statusCode(200)
                 .body(notNullValue());
@@ -21,7 +21,7 @@ public class HobbyResourceTest {
     @Test
     void getHobbyByType() {
         given()
-                .when().get("/action/recreational")
+                .when().get("/actions/recreational")
                 .then()
                 .statusCode(200)
                 .body(notNullValue());
@@ -30,7 +30,7 @@ public class HobbyResourceTest {
     @Test
     void getHobbyUsingTypeDrawing() {
         given()
-                .when().get("/action/drawing")
+                .when().get("/actions/drawing")
                 .then()
                 .statusCode(204)
                 .body(notNullValue());
@@ -39,7 +39,7 @@ public class HobbyResourceTest {
     @Test
     void getHobbyUsingUnsupportedType() {
         given()
-                .when().get("/action/unsupported")
+                .when().get("/actions/unsupported")
                 .then()
                 .statusCode(503)
                 .body(notNullValue());
