@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-@Path("action")
+@Path("actions")
 public class HobbyResource {
 
     private final Logger logger = Logger.getLogger(getClass());
