@@ -9,7 +9,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+import static javax.ws.rs.core.Response.Status.NOT_IMPLEMENTED;
+import static javax.ws.rs.core.Response.Status.OK;
+import static javax.ws.rs.core.Response.Status.NO_CONTENT;
+import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 
 @Path("actions")
 public class HobbyResource {
@@ -39,21 +42,21 @@ public class HobbyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHobbyByType(@PathParam("type") String type) {
        return switch(type){
-            case "recreational":
-                yield Response.status(Response.Status.OK)
+           case "recreational" -> Response.status(OK)
                         .entity(service.getActivityByType(type)).build();
-           case "drawing":
-               yield Response.status(Response.Status.NO_CONTENT)
+           case "drawing" -> Response.status(NO_CONTENT)
                        .entity(BasicHobby.empty()).build();
-           default :
-               yield invokeServiceUnavailable(type);
+           default -> {
+               BasicHobby hobby = service.getActivityByType(type);
+               yield ((hobby.participants > 0) ? Response.status(NOT_IMPLEMENTED).build()
+                       : invokeServiceUnavailable(type));
+           }
         };
     }
 
 
     private Response invokeServiceUnavailable(String type) {
         LOGGER.debug(String.format("Type specified is not supported %s", type));
-        return Response.status(Response.Status.SERVICE_UNAVAILABLE)
-                .entity(BasicHobby.empty()).build();
+        return Response.status(SERVICE_UNAVAILABLE).entity(BasicHobby.empty()).build();
     }
 }
