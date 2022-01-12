@@ -1,7 +1,9 @@
 package com.redhat.developers;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("actions")
 public class HobbyResource {
 
-    private final Logger logger = Logger.getLogger(getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(HobbyResource.class);
 
 
     @RestClient
@@ -50,7 +52,7 @@ public class HobbyResource {
 
 
     private Response invokeServiceUnavailable(String type) {
-        logger.debug(String.format("Type specified is not supported %s", type));
+        LOGGER.debug(String.format("Type specified is not supported %s", type));
         return Response.status(Response.Status.SERVICE_UNAVAILABLE)
                 .entity(BasicHobby.empty()).build();
     }
