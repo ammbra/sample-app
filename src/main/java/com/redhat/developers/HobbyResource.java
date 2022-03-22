@@ -21,7 +21,6 @@ public class HobbyResource {
 
 
     @RestClient
-    @Inject
     ActivityService service;
 
 
