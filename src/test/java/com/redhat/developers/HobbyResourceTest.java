@@ -44,4 +44,13 @@ public class HobbyResourceTest {
                 .statusCode(503)
                 .body(notNullValue());
     }
+
+    @Test
+    void getHobbyUsingUnsupportedType() {
+        given()
+                .when().get("/actions/notimplemented")
+                .then()
+                .statusCode(501)
+                .body(notNullValue());
+    }
 }
