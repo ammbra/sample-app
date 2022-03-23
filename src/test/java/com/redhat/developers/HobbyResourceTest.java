@@ -46,9 +46,9 @@ public class HobbyResourceTest {
     }
 
     @Test
-    void getHobbyUsingUnsupportedType() {
+    void getHobbyUsingSupportedType() {
         given()
-                .when().get("/actions/notimplemented")
+                .when().get("/actions/busywork")
                 .then()
                 .statusCode(501)
                 .body(notNullValue());
