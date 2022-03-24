@@ -19,6 +19,15 @@ public class HobbyResourceTest {
     }
 
     @Test
+    void getCompleteHobby() {
+        given()
+                .when().get("/actions/accessibility?minaccessibility=0&maxaccessibility=1")
+                .then()
+                .statusCode(200)
+                .body(notNullValue());
+    }
+
+    @Test
     void getHobbyByType() {
         given()
                 .when().get("/actions/recreational")
