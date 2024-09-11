@@ -1,4 +1,5 @@
-# sample-app Project
+# This project is archived!
+## sample-app project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
